@@ -175,7 +175,72 @@ export const MobileLogo = styled(Logo)`
   top: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.4rem;
+  font-size: 1.2rem; // Reduced from 1.4rem for better mobile fitting
+  width: 80%; // Ensure it doesn't overflow the container
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; // Prevent wrapping
+  
+  @media (max-width: 350px) {
+    font-size: 1rem; // Even smaller for very small screens
+  }
+`;
+
+export const CodeBadge = styled.span`
+  font-family: "Fira Code", monospace;
+  color: var(--primary);
+  font-weight: 600;
+  margin-right: 8px;
+  position: relative;
+  overflow: hidden;
+  
+  @keyframes shine {
+    10% { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
+  }
+`;
+
+export const LogoText = styled.span`
+  position: relative;
+  
+  &::after {
+    content: "developer";
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+    font-size: 0.6rem;
+    font-weight: normal;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+     background: linear-gradient(45deg, var(--primary), #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  ${Logo}:hover &::after {
+    opacity: 1;
+  }
+`;
+
+// Then define MobileCodeBadge
+export const MobileCodeBadge = styled(CodeBadge)`
+  font-size: 0.9rem;
+  margin-right: 6px;
+  
+  @media (max-width: 350px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const MobileLogoText = styled(LogoText)`
+  font-size: 0.9rem;
+  
+  @media (max-width: 350px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const MobileNavLink = styled(motion.a)`
@@ -235,4 +300,13 @@ export const MobileCloseButton = styled(MobileMenuButton)`
     background: rgba(255, 255, 255, 0.1);
     transform: rotate(90deg);
   }
+`;
+
+export const NavProgressBar = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00FF9D, #00BFFF);
+  transition: width 0.5s ease;
 `;

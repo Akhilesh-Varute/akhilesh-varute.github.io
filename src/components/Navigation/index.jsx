@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, Terminal, X } from 'lucide-react';
 import {
   NavContainer,
   NavLinksContainer,
@@ -11,7 +11,10 @@ import {
   MobileMenuButton,
   MobileMenu,
   MobileNavLink,
-  MobileCloseButton
+  MobileCloseButton,
+  CodeBadge,
+  LogoText,
+  NavProgressBar
 } from './styles';
 
 const navItems = [
@@ -25,6 +28,17 @@ const navItems = [
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [badgeIndex, setBadgeIndex] = useState(0);
+  const badges = ['{ DEV }', '{ A.I }', '{ AWS }', '{ GEN }'];
+
+  // Cycle through badges on interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBadgeIndex((prev) => (prev + 1) % badges.length);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Check if mobile
   const [isMobile, setIsMobile] = useState(false);
@@ -32,7 +46,7 @@ const Navigation = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 480);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -43,18 +57,18 @@ const Navigation = () => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
       const sections = document.querySelectorAll('section[id]');
-      
+
       let found = false;
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionBottom = sectionTop + section.offsetHeight;
-        
+
         if (!found && scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           setActiveSection(section.getAttribute('id'));
           found = true;
         }
       });
-      
+
       // If we're at the top or no section found, set home as active
       if (window.scrollY < 100 || !found) {
         setActiveSection('home');
@@ -89,7 +103,7 @@ const Navigation = () => {
     } else {
       document.body.style.overflow = '';
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -99,24 +113,23 @@ const Navigation = () => {
     <>
       <NavContainer
         initial={{ y: -80, opacity: 0 }}
-        animate={{ 
-          y: 0, 
+        animate={{
+          y: 0,
           opacity: 1,
-          transition: { 
+          transition: {
             duration: 0.5
           }
         }}
       >
         <NavLinksContainer>
           {/* Logo with name - visible on all screen sizes */}
-          <Logo
-            onClick={() => handleNavClick('#home')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            AKHILESH <span>PORTFOLIO</span>
+          <Logo>
+            <CodeBadge>
+              {badges[badgeIndex]}
+            </CodeBadge>
+            <LogoText>AKHILESH</LogoText>
           </Logo>
-          
+
           {!isMobile ? (
             // Desktop navigation links
             <NavLinks>
@@ -148,21 +161,27 @@ const Navigation = () => {
             </MobileMenuButton>
           )}
         </NavLinksContainer>
+        <NavProgressBar
+          style={{
+            width: `${(activeSection === 'home' ? 0 :
+              activeSection === 'projects' ? 25 :
+                activeSection === 'skills' ? 50 :
+                  activeSection === 'experience' ? 75 : 100)}%`
+          }}
+        />
       </NavContainer>
 
       {/* Mobile menu overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <MobileMenu
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <MobileMenu>
             <MobileLogo>
-              AKHILESH <span>PORTFOLIO</span>
-            </MobileLogo>
-            
+  <CodeBadge style={{ fontSize: '0.9rem', marginRight: '6px' }}>
+    {badges[badgeIndex]}
+  </CodeBadge>
+  <LogoText style={{ fontSize: '0.9rem' }}>AKHILESH</LogoText>
+</MobileLogo>
+
             <MobileCloseButton
               onClick={() => setIsMobileMenuOpen(false)}
               whileHover={{ scale: 1.1 }}
@@ -172,7 +191,7 @@ const Navigation = () => {
             >
               <X size={20} />
             </MobileCloseButton>
-            
+
             {navItems.map((item, index) => (
               <MobileNavLink
                 key={item.href}
@@ -183,20 +202,20 @@ const Navigation = () => {
                   handleNavClick(item.href);
                 }}
                 initial={{ opacity: 0, x: -20 }}
-                animate={{ 
-                  opacity: 1, 
+                animate={{
+                  opacity: 1,
                   x: 0,
-                  transition: { 
+                  transition: {
                     delay: 0.1 + index * 0.08,
                     duration: 0.3
-                  } 
+                  }
                 }}
-                exit={{ 
-                  opacity: 0, 
+                exit={{
+                  opacity: 0,
                   x: -10,
-                  transition: { 
+                  transition: {
                     duration: 0.2,
-                    delay: (navItems.length - index) * 0.04 
+                    delay: (navItems.length - index) * 0.04
                   }
                 }}
                 whileHover={{ x: 5 }}
