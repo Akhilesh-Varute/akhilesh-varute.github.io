@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // This should match your GitHub Pages URL
+  base: './', // Use relative paths for GitHub Pages
   server:{
     host:'0.0.0.0',
   }
