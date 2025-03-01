@@ -23,7 +23,8 @@ import {
   CTAButton,
   SocialLinks,
   SocialLink,
-  SocialLabel
+  SocialLabel,
+  TypedTextContainer
 } from './styles';
 
 const Hero = () => {
@@ -72,9 +73,11 @@ const Hero = () => {
           transition={{ delay: 0.4, duration: 0.8 }}
         >
           <Subtitle>
-            Results-driven developer specializing in{' '}
-            <TypingText>Gen AI, cloud-native solutions, and full-stack development</TypingText>
+            Results-driven developer specializing in
           </Subtitle>
+          <TypedTextContainer>
+            <TypingText>Gen AI, cloud-native solutions, and full-stack development</TypingText>
+          </TypedTextContainer>
         </SubtitleContainer>
 
         <StatsContainer

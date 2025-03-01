@@ -15,8 +15,10 @@ export const theme = {
     },
     
     fonts: {
-      primary: "'Inter', sans-serif",
-      code: "'Fira Code', monospace"
+      primary: "'JetBrains Mono', monospace", // Changed from Inter to JetBrains Mono
+      heading: "'Space Mono', monospace",      // Added a heading font
+      code: "'Fira Code', monospace",         // Kept your existing code font
+      alt: "'IBM Plex Mono', monospace"       // Alternative font for variety
     },
   
     breakpoints: {

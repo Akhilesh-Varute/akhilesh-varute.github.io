@@ -157,11 +157,11 @@ const Portfolio = () => {
               {/* Projects Section */}
               <Projects />
 
-              {/* Experience Section */}
-              <Experience />
-
               {/* Skills Section */}
               <Skills />
+
+              {/* Experience Section */}
+              <Experience />
 
               {/* Contact Section */}
               <Contact />

@@ -88,7 +88,7 @@ export const Badge = styled(motion.div)`
 `;
 
 export const HeroTitle = styled(motion.h1)`
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -112,13 +112,16 @@ export const TitleHighlight = styled.span`
 
 export const SubtitleContainer = styled(motion.div)`
   margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 `;
 
 export const Subtitle = styled.p`
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 0 0 0.5rem 0;
 `;
 
 export const StatsContainer = styled(motion.div)`
@@ -227,13 +230,24 @@ export const SocialLink = styled(motion.a)`
     transform: translateY(-3px);
   }
 `;
+
+export const TypedTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+`;
+
 export const TypingText = styled.span`
-  display: inline-block;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 600;
   color: var(--primary);
   border-right: 2px solid var(--primary);
-  padding-right: 5px;
+  padding: 0.1rem 0.5rem 0.1rem 0.3rem;
   white-space: nowrap;
   overflow: hidden;
+  background: rgba(0, 255, 157, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
   animation: 
     ${typing} 3.5s steps(40, end),
     ${blink} 0.75s step-end infinite;

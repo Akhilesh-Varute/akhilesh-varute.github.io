@@ -20,22 +20,27 @@ export const blackHoleFragmentShader = `
     vec2 p = vUv - center;
     float dist = length(p);
     
-    // Create the black hole effect
-    float brightness = smoothstep(0.5, 0.2, dist);
+    // Create the black hole effect with balanced brightness
+    float brightness = smoothstep(0.5, 0.2, dist) * 0.85; // Slightly reduced brightness
+    
+    // More balanced color gradient - softer blue
     vec3 color = mix(
-      vec3(0.0, 0.0, 0.0),
-      vec3(0.1, 0.3, 1.0),
+      vec3(0.02, 0.02, 0.04), // Slightly lighter black (very dark blue)
+      vec3(0.08, 0.2, 0.6),   // Softer blue tone
       brightness
     );
     
-    // Add time-based swirl
+    // Add time-based swirl with gentler effect
     float angle = atan(p.y, p.x);
     float swirl = sin(angle * 3.0 + time * 0.5) * 0.5 + 0.5;
-    color += vec3(swirl * 0.1);
+    color += vec3(swirl * 0.08); // Gentler swirl effect
     
-    // Add accretion disk
-    float disk = smoothstep(0.3, 0.29, dist) * smoothstep(0.28, 0.29, dist);
-    color += vec3(0.0, 1.0, 0.6) * disk * (sin(angle * 20.0 + time * 2.0) * 0.5 + 0.5);
+    // Add accretion disk with more balanced glow
+    float disk = smoothstep(0.32, 0.31, dist) * smoothstep(0.3, 0.31, dist);
+    vec3 diskColor = vec3(0.0, 0.7, 0.4); // Slightly softer green
+    
+    // Make disk subtler and more visually balanced
+    color += diskColor * disk * (sin(angle * 16.0 + time * 1.8) * 0.4 + 0.6) * 0.8;
     
     gl_FragColor = vec4(color, 1.0);
   }

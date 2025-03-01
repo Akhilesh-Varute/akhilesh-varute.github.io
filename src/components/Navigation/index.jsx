@@ -1,4 +1,3 @@
-// components/Navigation/index.jsx
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -6,6 +5,9 @@ import {
   NavContainer,
   NavLinksContainer,
   NavLink,
+  NavLinks,
+  Logo,
+  MobileLogo,
   MobileMenuButton,
   MobileMenu,
   MobileNavLink,
@@ -23,8 +25,9 @@ const navItems = [
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
+  // Check if mobile
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 480);
@@ -35,32 +38,40 @@ const Navigation = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Handle active section
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      const scrollPosition = window.scrollY + 100;
       const sections = document.querySelectorAll('section[id]');
       
       let found = false;
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (!found && scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        if (!found && scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           setActiveSection(section.getAttribute('id'));
           found = true;
         }
       });
+      
+      // If we're at the top or no section found, set home as active
+      if (window.scrollY < 100 || !found) {
+        setActiveSection('home');
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Check on initial load
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Smooth scroll function
   const handleNavClick = (href) => {
     setIsMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      const headerOffset = 100;
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -71,61 +82,98 @@ const Navigation = () => {
     }
   };
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <NavContainer
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100 }}
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ 
+          y: 0, 
+          opacity: 1,
+          transition: { 
+            duration: 0.5
+          }
+        }}
       >
         <NavLinksContainer>
+          {/* Logo with name - visible on all screen sizes */}
+          <Logo
+            onClick={() => handleNavClick('#home')}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            AKHILESH <span>PORTFOLIO</span>
+          </Logo>
+          
           {!isMobile ? (
-            navItems.map((item) => (
-              <NavLink
-                key={item.href}
-                href={item.href}
-                active={activeSection === item.href.slice(1)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(item.href);
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.title}
-              </NavLink>
-            ))
+            // Desktop navigation links
+            <NavLinks>
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  active={activeSection === item.href.slice(1)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item.href);
+                  }}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item.title}
+                </NavLink>
+              ))}
+            </NavLinks>
           ) : (
-            <>
-              <NavLink href="#home">Portfolio</NavLink>
-              <MobileMenuButton
-                onClick={() => setIsMobileMenuOpen(true)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Menu size={20} />
-              </MobileMenuButton>
-            </>
+            // Mobile menu button
+            <MobileMenuButton
+              onClick={() => setIsMobileMenuOpen(true)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+            </MobileMenuButton>
           )}
         </NavLinksContainer>
       </NavContainer>
 
+      {/* Mobile menu overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <MobileMenu
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
+            <MobileLogo>
+              AKHILESH <span>PORTFOLIO</span>
+            </MobileLogo>
+            
             <MobileCloseButton
               onClick={() => setIsMobileMenuOpen(false)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              aria-label="Close menu"
             >
-              <X size={24} />
+              <X size={20} />
             </MobileCloseButton>
-            {navItems.map((item) => (
+            
+            {navItems.map((item, index) => (
               <MobileNavLink
                 key={item.href}
                 href={item.href}
@@ -134,8 +182,24 @@ const Navigation = () => {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ 
+                  opacity: 1, 
+                  x: 0,
+                  transition: { 
+                    delay: 0.1 + index * 0.08,
+                    duration: 0.3
+                  } 
+                }}
+                exit={{ 
+                  opacity: 0, 
+                  x: -10,
+                  transition: { 
+                    duration: 0.2,
+                    delay: (navItems.length - index) * 0.04 
+                  }
+                }}
+                whileHover={{ x: 5 }}
               >
                 {item.title}
               </MobileNavLink>
