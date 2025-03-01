@@ -1,4 +1,3 @@
-// components/Hero/index.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Terminal, Code, Server } from 'lucide-react';
@@ -33,6 +32,8 @@ const Hero = () => {
     className: "hero-icon",
     strokeWidth: 1.5
   };
+
+  const typingTextContent = "Gen AI, cloud-native solutions, and full-stack development";
 
   return (
     <HeroContainer id="home">
@@ -76,7 +77,9 @@ const Hero = () => {
             Results-driven developer specializing in
           </Subtitle>
           <TypedTextContainer>
-            <TypingText>Gen AI, cloud-native solutions, and full-stack development</TypingText>
+            <TypingText>
+              {typingTextContent}
+            </TypingText>
           </TypedTextContainer>
         </SubtitleContainer>
 

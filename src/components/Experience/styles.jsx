@@ -1,4 +1,3 @@
-// components/Experience/styles.js
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -21,6 +20,11 @@ export const ExperienceSection = styled.section`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    min-height: auto; /* Allow height to adjust based on content */
+    padding: 2rem 0; /* Reduce padding on mobile */
+  }
 `;
 
 export const ExperienceContainer = styled(motion.div)`
@@ -28,11 +32,19 @@ export const ExperienceContainer = styled(motion.div)`
   width: 100%;
   padding: 2rem;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 1rem; /* Reduce padding on smaller screens */
+  }
 `;
 
 export const SectionHeader = styled.div`
   text-align: center;
   margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem; /* Reduce spacing on mobile */
+  }
 `;
 
 export const Title = styled(motion.h2)`
@@ -43,6 +55,10 @@ export const Title = styled(motion.h2)`
   background-clip: text;
   color: transparent;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const Subtitle = styled(motion.p)`
@@ -51,6 +67,10 @@ export const Subtitle = styled(motion.p)`
   max-width: 600px;
   margin: 0 auto;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 export const Timeline = styled.div`
@@ -78,8 +98,9 @@ export const Timeline = styled.div`
   }
 
   @media (max-width: 768px) {
+    padding: 1rem 0;
     &::before {
-      left: 30px;
+      left: 20px; /* Move timeline line closer to edge on mobile */
     }
   }
 `;
@@ -118,14 +139,16 @@ export const TimelineItem = styled(motion.div)`
   }
 
   @media (max-width: 768px) {
-    width: calc(100% - 60px);
-    margin-left: 60px !important;
-    padding-right: 0 !important;
-    padding-left: 30px !important;
+    width: 100%; /* Full width on mobile */
+    margin-left: 0 !important; /* Remove offset */
+    padding-left: 40px; /* Space for timeline dot and connector */
+    padding-right: 0;
+    margin-bottom: 2rem; /* Reduce spacing between items */
 
     &::before {
-      left: -8px !important;
+      left: 6px; /* Align dot with timeline line */
       right: auto !important;
+      top: 20px; /* Adjust vertical position */
     }
   }
 `;
@@ -136,30 +159,20 @@ export const TimelineConnector = styled.div`
   right: 8px;
   width: 22px;
   height: 2px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--primary)
-  );
+  background: linear-gradient(to right, transparent, var(--primary));
 
   ${TimelineItem}:nth-child(even) & {
     right: auto;
     left: 8px;
-    background: linear-gradient(
-      to left,
-      transparent,
-      var(--primary)
-    );
+    background: linear-gradient(to left, transparent, var(--primary));
   }
 
   @media (max-width: 768px) {
-    left: 8px !important;
+    left: 22px; /* Align with timeline line and dot */
     right: auto !important;
-    background: linear-gradient(
-      to right,
-      var(--primary),
-      transparent
-    ) !important;
+    width: 18px; /* Slightly shorter on mobile */
+    top: 28px; /* Adjust vertical position */
+    background: linear-gradient(to right, var(--primary), transparent) !important;
   }
 `;
 
@@ -180,7 +193,13 @@ export const ExperienceCard = styled(motion.div)`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 100%; /* Full width on mobile */
+    padding: 1.5rem; /* Reduce padding */
+    border-radius: 15px; /* Slightly smaller radius */
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem; /* Further reduce padding on very small screens */
   }
 `;
 
@@ -192,6 +211,11 @@ export const Period = styled.span`
   font-size: 0.875rem;
   color: var(--primary);
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem; /* Smaller text on mobile */
+    padding: 0.4rem 0.8rem;
+  }
 `;
 
 export const Role = styled.h3`
@@ -199,12 +223,29 @@ export const Role = styled.h3`
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem; /* Slightly smaller on mobile */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Company = styled.h4`
   font-size: 1.25rem;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const AchievementsList = styled.ul`
@@ -219,6 +260,7 @@ export const AchievementItem = styled(motion.li)`
   margin-bottom: 0.75rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive font size */
 
   &::before {
     content: '→';
@@ -234,5 +276,10 @@ export const AchievementItem = styled(motion.li)`
 
   ${ExperienceCard}:hover & {
     color: var(--text-primary);
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
   }
 `;

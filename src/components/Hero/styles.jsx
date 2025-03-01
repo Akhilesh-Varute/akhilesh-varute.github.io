@@ -1,7 +1,7 @@
-// components/Hero/styles.js
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
+// Keyframes
 export const gridFloat = keyframes`
   0% { transform: rotate(-45deg) translateY(0); }
   100% { transform: rotate(-45deg) translateY(-50%); }
@@ -14,13 +14,18 @@ export const gradient = keyframes`
 `;
 
 export const typing = keyframes`
-  from { width: 0 }
-  to { width: 100% }
+  from { width: 0; }
+  to { width: 100%; }
 `;
 
 export const blink = keyframes`
-  from, to { border-color: transparent }
+  from, to { border-color: transparent; }
   50% { border-color: var(--primary); }
+`;
+
+export const fadeSlide = keyframes`
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
 export const HeroContainer = styled.section`
@@ -31,6 +36,10 @@ export const HeroContainer = styled.section`
   justify-content: center;
   padding: 6rem 2rem;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 4rem 1rem;
+  }
 `;
 
 export const Background = styled.div`
@@ -85,6 +94,11 @@ export const Badge = styled(motion.div)`
     border-color: var(--primary);
     box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
 `;
 
 export const HeroTitle = styled(motion.h1)`
@@ -94,6 +108,10 @@ export const HeroTitle = styled(motion.h1)`
   margin-bottom: 1.5rem;
   position: relative;
   color: var(--text-primary);
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const TitleHighlight = styled.span`
@@ -116,12 +134,70 @@ export const SubtitleContainer = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 export const Subtitle = styled.p`
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   color: var(--text-secondary);
   margin: 0 0 0.5rem 0;
+
+  @media (max-width: 768px) {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+  }
+`;
+
+export const TypedTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  max-width: 90%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 85%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 80%;
+  }
+`;
+
+export const TypingText = styled.span`
+  display: inline-block;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--primary);
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 255, 157, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
+  max-width: 100%;
+  overflow: hidden;
+
+  /* Desktop behavior */
+  @media (min-width: 769px) {
+    white-space: nowrap;
+    border-right: 2px solid var(--primary);
+    animation: 
+      ${typing} 3.5s steps(48, end) forwards,
+      ${blink} 0.75s step-end infinite;
+  }
+
+  /* Mobile behavior */
+  @media (max-width: 768px) {
+    white-space: normal; /* Allow wrapping if needed */
+    animation: ${fadeSlide} 1.5s ease-out forwards; /* Simple fade-in/slide */
+    border-right: none; /* Remove cursor on mobile */
+    padding: 0.15rem 0.4rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    padding: 0.1rem 0.3rem;
+  }
 `;
 
 export const StatsContainer = styled(motion.div)`
@@ -153,6 +229,10 @@ export const StatItem = styled.div`
     border-color: var(--primary);
     box-shadow: 0 10px 30px rgba(0, 255, 157, 0.1);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
 `;
 
 export const StatContent = styled.div`
@@ -164,14 +244,22 @@ export const StatNumber = styled.span`
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 `;
 
 export const StatLabel = styled.span`
   font-size: 0.875rem;
   color: var(--text-secondary);
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+  }
 `;
 
-export const HeroActions = styled(motion.div)`
+export const CTAContainer = styled(motion.div)`
   display: flex;
   gap: 1.5rem;
   justify-content: center;
@@ -184,21 +272,35 @@ export const HeroActions = styled(motion.div)`
   }
 `;
 
-export const ActionButton = styled.a`
+export const CTAButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 1rem 2rem;
   border-radius: 12px;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  
-  background: ${props => props.primary ? 'var(--primary)' : 'rgba(0, 255, 157, 0.1)'};
-  color: ${props => props.primary ? 'var(--background)' : 'var(--primary)'};
-  border: ${props => props.primary ? 'none' : '1px solid var(--primary)'};
+  transition: all 0.3s ease;
+  text-decoration: none;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 255, 157, 0.2);
+  ${props => props.$isPrimary ? `
+    background: var(--primary);
+    color: var(--background);
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 255, 157, 0.2);
+    }
+  ` : `
+    background: rgba(0, 255, 157, 0.1);
+    color: var(--primary);
+    &:hover {
+      background: rgba(0, 255, 157, 0.2);
+      transform: translateY(-2px);
+    }
+  `}
+
+  @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
   }
 `;
 
@@ -229,78 +331,18 @@ export const SocialLink = styled(motion.a)`
     color: var(--primary);
     transform: translateY(-3px);
   }
-`;
-
-export const TypedTextContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-`;
-
-export const TypingText = styled.span`
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
-  font-weight: 600;
-  color: var(--primary);
-  border-right: 2px solid var(--primary);
-  padding: 0.1rem 0.5rem 0.1rem 0.3rem;
-  white-space: nowrap;
-  overflow: hidden;
-  background: rgba(0, 255, 157, 0.15);
-  border-radius: 4px;
-  box-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
-  animation: 
-    ${typing} 3.5s steps(40, end),
-    ${blink} 0.75s step-end infinite;
-`;
-
-export const CTAContainer = styled(motion.div)`
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-bottom: 3rem;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 2rem;
+    padding: 0.75rem;
   }
-`;
-
-// Rename ActionButton to CTAButton (optional)
-export const CTAButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  
-  ${props => props.$isPrimary ? `
-    background: var(--primary);
-    color: var(--background);
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 255, 157, 0.2);
-    }
-  ` : `
-    background: rgba(0, 255, 157, 0.1);
-    color: var(--primary);
-    &:hover {
-      background: rgba(0, 255, 157, 0.2);
-      transform: translateY(-2px);
-    }
-  `}
 `;
 
 export const SocialLabel = styled.span`
   display: none;
   margin-left: 0.5rem;
   font-size: 0.9rem;
-  
+
   @media (min-width: 768px) {
     display: inline;
   }
 `;
-
