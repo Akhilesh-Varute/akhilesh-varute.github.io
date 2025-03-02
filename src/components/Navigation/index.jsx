@@ -127,7 +127,7 @@ const Navigation = () => {
             <CodeBadge>
               {badges[badgeIndex]}
             </CodeBadge>
-            <LogoText>AKHILESH</LogoText>
+            <LogoText>AKHILESH-VARUTE</LogoText>
           </Logo>
 
           {!isMobile ? (
@@ -176,11 +176,11 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <MobileMenu>
             <MobileLogo>
-  <CodeBadge style={{ fontSize: '0.9rem', marginRight: '6px' }}>
-    {badges[badgeIndex]}
-  </CodeBadge>
-  <LogoText style={{ fontSize: '0.9rem' }}>AKHILESH</LogoText>
-</MobileLogo>
+              <CodeBadge style={{ fontSize: '0.9rem', marginRight: '6px' }}>
+                {badges[badgeIndex]}
+              </CodeBadge>
+              <LogoText style={{ fontSize: '0.9rem' }}>AKHILESH-VARUTE</LogoText>
+            </MobileLogo>
 
             <MobileCloseButton
               onClick={() => setIsMobileMenuOpen(false)}

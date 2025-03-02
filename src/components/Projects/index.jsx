@@ -1,4 +1,3 @@
-// components/Projects/index.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Brain, Cloud, Activity, Database } from 'lucide-react';
@@ -34,10 +33,10 @@ const projectsData = [
     icon: Database
   },
   {
-    title: "AI-Based Automation Platform",
-    description: "Built and launched AI-driven products that significantly improved automation for internal processes, reducing manual effort and increasing operational efficiency.",
-    impact: "60% Manual Effort Reduction",
-    tech: ["Gen AI", "Python", "React.js", "MongoDB"],
+    title: "AI-Powered Developer Assistant",
+    description: "Created an AI-driven assistant to provide real-time support for development tasks and cloud configurations, optimizing team workflows.",
+    impact: "Enhanced Workflow Efficiency",
+    tech: ["Gen AI", "Python", "AWS", "WebSocket"],
     icon: Brain
   },
   {

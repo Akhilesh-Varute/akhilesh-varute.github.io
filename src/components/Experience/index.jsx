@@ -1,4 +1,3 @@
-// components/Experience/index.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -28,7 +27,7 @@ const experienceData = [
       "Developed Gen AI-based products and cloud-native solutions for enhanced automation",
       "Reduced debugging time by 40%, accelerating product release cycles",
       "Built a next-generation AWS integration platform for internal applications",
-      "Automated repetitive tasks, improving development speed by 60%"
+      "Accelerated deployment cycles by 75% using cloud-native architectures"
     ]
   },
   {
@@ -37,9 +36,9 @@ const experienceData = [
     company: "Sunbeam Infotech",
     achievements: [
       "Completed Post Graduate-Diploma in Advanced Computing",
-      "Focused on modern full-stack development and cloud technologies",
-      "Built multiple projects using React.js, Node.js, and cloud services",
-      "Learned and implemented DevOps practices and cloud-native development"
+      "Focused on modern full-stack development and Agile methodologies",
+      "Built multiple projects using React.js, Node.js, and Docker",
+      "Learned and implemented DevOps practices"
     ]
   }
 ];

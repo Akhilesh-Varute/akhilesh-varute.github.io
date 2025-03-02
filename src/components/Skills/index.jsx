@@ -1,4 +1,3 @@
-// components/Skills/index.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Cloud, Database, Layout, Brain, Terminal } from 'lucide-react';
@@ -106,7 +105,14 @@ const Skills = () => {
 
         <SkillsGrid>
           {skillsData.map((category, index) => (
-            <SkillCard key={category.category}>
+            <SkillCard
+              key={category.category}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               <CategoryIcon>
                 <category.icon size={32} strokeWidth={1.5} />
               </CategoryIcon>
@@ -114,14 +120,19 @@ const Skills = () => {
               
               <SkillsList>
                 {category.skills.map((skill, i) => (
-                  <motion.div key={skill.name} style={{ width: '100%' }}>
-                    <SkillTag>
-                      {skill.name}
-                      <ProgressBar>
-                        <Progress value={skill.level} />
-                      </ProgressBar>
-                    </SkillTag>
-                  </motion.div>
+                  <SkillTag
+                    key={skill.name}
+                    custom={i}
+                    variants={tagVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
+                    {skill.name}
+                    <ProgressBar>
+                      <Progress value={skill.level} />
+                    </ProgressBar>
+                  </SkillTag>
                 ))}
               </SkillsList>
             </SkillCard>

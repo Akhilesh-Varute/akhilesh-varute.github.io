@@ -148,10 +148,10 @@ const Particles = ({ count = 200, scroll }) => {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
+        size={0.03} // Reduced from 0.05
         color="#00ff88"
         transparent
-        opacity={0.6}
+        opacity={0.4} // Reduced from 0.6
         sizeAttenuation
       />
     </points>
@@ -167,15 +167,13 @@ const SceneContent = () => {
     const handleScroll = () => {
       scrollRef.current = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useFrame(() => {
-    const targetX = Math.sin(scrollRef.current * Math.PI * 2) * 3;
-    const targetY = scrollRef.current * 2;
-
+    const targetX = Math.sin(scrollRef.current * Math.PI * 2) * 2; // Reduced range for subtler movement
+    const targetY = scrollRef.current * 1.5; // Reduced vertical movement
     camera.position.x += (targetX - camera.position.x) * 0.05;
     camera.position.y += (targetY - camera.position.y) * 0.05;
     camera.lookAt(0, 0, 0);
@@ -183,31 +181,40 @@ const SceneContent = () => {
 
   return (
     <group>
-      <BlackHole scroll={scrollRef.current} />
-      <RobotHead scroll={scrollRef.current} />
-      <Particles count={200} scroll={scrollRef.current} />
+      {/* Move BlackHole further back and slightly off-center */}
+      <BlackHole scroll={scrollRef.current} position={[-2, 0, -8]} />
+      
+      {/* Move RobotHead slightly off-center and reduce its prominence */}
+      <RobotHead scroll={scrollRef.current} position={[2, 0, -2]} />
+      
+      {/* Keep particles subtle */}
+      <Particles count={150} scroll={scrollRef.current} />
 
-      <ambientLight intensity={0.2} />
-      <pointLight position={[5, 5, 5]} intensity={0.5} color="#00ff88" />
+      {/* Subtle lighting */}
+      <ambientLight intensity={0.08} />
+      <pointLight position={[5, 5, 5]} intensity={0.2} color="#00ff88" />
       <spotLight
         position={[0, 5, 2]}
         angle={0.4}
         penumbra={1}
-        intensity={0.5}
+        intensity={0.2}
         color="#ffffff"
         castShadow
       />
 
+      {/* Consolidated and softened fog */}
+      <fog attach="fog" args={['#000000', 10, 25]} />
+
+      {/* Further subdued stars */}
       <Stars
-        radius={50}
-        depth={50}
-        count={1000}
-        factor={4}
+        radius={60}
+        depth={60}
+        count={300}
+        factor={2}
         saturation={0}
         fade
+        opacity={0.3}
       />
-
-      <fog attach="fog" args={['#000000', 5, 15]} />
     </group>
   );
 };
@@ -215,47 +222,29 @@ const SceneContent = () => {
 // Performance Wrapper Component
 const PerformanceScene = () => (
   <Canvas
-    camera={{ position: [0, 0, 10], fov: 75 }}
+    camera={{ position: [0, 0, 12], fov: 75 }} // Moved camera back slightly
     dpr={[1, 2]}
     gl={{
       antialias: true,
       powerPreference: "high-performance",
-      alpha: false,
+      alpha: true, // Changed to true for better layering with hero
       stencil: false,
-      depth: false
+      depth: true // Re-enabled depth for better 3D separation
     }}
     style={{
       position: 'absolute',
       top: 0,
       left: 0,
       width: '100%',
-      height: '100%'
+      height: '100%',
+      background: 'rgba(0, 0, 0, 0.1)', // Subtle dark overlay
     }}
   >
     <AdaptiveDpr pixelated />
     <SceneContent />
     <EffectComposer>
-      <Bloom
-        intensity={1.5}
-        luminanceThreshold={0.1}
-        luminanceSmoothing={0.9}
-        height={300}
-      />
+      <Bloom intensity={0.6} luminanceThreshold={0.4} luminanceSmoothing={0.6} height={150} /> {/* Further toned down */}
     </EffectComposer>
-    {/* <EffectComposer>
-      <Bloom
-        intensity={1.5}
-        luminanceThreshold={0.1}
-        luminanceSmoothing={0.9}
-        height={300}
-      />
-      <ChromaticAberration
-        offset={[0.002, 0.002]}
-        blendFunction={BlendFunction.NORMAL}
-      />
-      <Noise opacity={0.02} />
-      <Vignette darkness={0.5} offset={0.5} />
-    </EffectComposer> */}
     <OrbitControls
       enableZoom={false}
       enablePan={false}

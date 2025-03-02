@@ -1,4 +1,3 @@
-// components/Projects/styles.js
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -23,7 +22,7 @@ export const ProjectsSection = styled.section`
 `;
 
 export const ProjectsContainer = styled(motion.div)`
-  max-width: 1400px;
+  max-width: 1200px; // Reduced from 1400px for tighter control
   width: 100%;
   padding: 2rem;
   margin: 0 auto;
@@ -31,7 +30,7 @@ export const ProjectsContainer = styled(motion.div)`
 
 export const SectionHeader = styled.div`
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem; // Increased from 4rem for more separation
 `;
 
 export const Title = styled(motion.h2)`
@@ -42,6 +41,7 @@ export const Title = styled(motion.h2)`
   background-clip: text;
   color: transparent;
   margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); // Added glow
 `;
 
 export const Subtitle = styled(motion.p)`
@@ -53,8 +53,8 @@ export const Subtitle = styled(motion.p)`
 
 export const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Reduced from 320px for better fit
+  gap: 3rem; // Increased from 2.5rem for breathing room
   width: 100%;
   perspective: 1000px;
 
@@ -66,8 +66,8 @@ export const ProjectsGrid = styled.div`
 
 export const ProjectCard = styled(motion.div)`
   position: relative;
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(0, 255, 157, 0.1);
+  background: rgba(0, 0, 0, 0.85); // Slightly darker for contrast
+  border: 1px solid rgba(0, 255, 157, 0.2); // Slightly stronger base border
   border-radius: 20px;
   padding: 2.5rem;
   backdrop-filter: blur(10px);
@@ -76,8 +76,8 @@ export const ProjectCard = styled(motion.div)`
 
   &:hover {
     transform: translateY(-10px);
-    border-color: rgba(0, 255, 157, 0.3);
-    box-shadow: 0 15px 35px rgba(0, 255, 157, 0.1);
+    border-color: rgba(0, 255, 157, 0.4); // Slightly brighter hover
+    box-shadow: 0 15px 35px rgba(0, 255, 157, 0.15); // Softer glow
   }
 `;
 
@@ -99,18 +99,17 @@ export const IconContainer = styled.div`
 
   ${ProjectCard}:hover & {
     transform: scale(1.1);
-    background: rgba(0, 255, 157, 0.15);
-    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+    background: rgba(0, 255, 157, 0.2); // Brighter hover
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.25); // Enhanced glow
   }
 `;
-
 
 export const ProjectTitle = styled.h3`
   font-size: 1.75rem;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 255, 157, 0.3); // Added for readability
 
   ${ProjectCard}:hover & {
     transform: translateY(-2px);
@@ -130,7 +129,7 @@ export const ProjectImpact = styled.div`
   transition: all 0.3s ease;
 
   ${ProjectCard}:hover & {
-    background: rgba(0, 255, 157, 0.12);
+    background: rgba(0, 255, 157, 0.15); // Slightly stronger hover
     color: var(--primary);
     transform: scale(1.05);
   }
@@ -141,7 +140,6 @@ export const ProjectDescription = styled.p`
   line-height: 1.7;
   color: var(--text-secondary);
   margin-bottom: 2rem;
-  transition: color 0.3s ease;
 
   ${ProjectCard}:hover & {
     color: var(--text-primary);
@@ -159,20 +157,18 @@ export const TechStack = styled.div`
 
 export const TechTag = styled(motion.span)`
   padding: 0.5rem 1rem;
-  background: rgba(0, 255, 157, 0.05);
-  border: 1px solid rgba(0, 255, 157, 0.1);
+  background: rgba(0, 255, 157, 0.1); // Slightly stronger base background
+  border: 1px solid rgba(0, 255, 157, 0.15); // Slightly stronger border
   border-radius: 8px;
   font-size: 0.875rem;
   color: var(--text-secondary);
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 
   ${ProjectCard}:hover & {
     &:hover {
       transform: translateY(-2px);
-      background: rgba(0, 255, 157, 0.1);
-      border-color: rgba(0, 255, 157, 0.2);
+      background: rgba(0, 255, 157, 0.2);
+      border-color: rgba(0, 255, 157, 0.3);
       color: var(--primary);
     }
   }

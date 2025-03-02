@@ -42,13 +42,6 @@ export const HeroContainer = styled.section`
   }
 `;
 
-export const Background = styled.div`
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  opacity: 0.4;
-`;
-
 export const Grid = styled.div`
   position: absolute;
   inset: -100%;
@@ -70,7 +63,7 @@ export const Content = styled(motion.div)`
   position: relative;
   max-width: 1200px;
   width: 100%;
-  z-index: 2;
+  z-index: 10; // Increased for visibility over Scene
   text-align: center;
 `;
 
@@ -107,7 +100,8 @@ export const HeroTitle = styled(motion.h1)`
   line-height: 1.1;
   margin-bottom: 1.5rem;
   position: relative;
-  color: var(--text-primary);
+  color: #ffffff; // Pure white for contrast
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.5); // Glow for readability
 
   @media (max-width: 768px) {
     margin-bottom: 1rem;
@@ -177,7 +171,6 @@ export const TypingText = styled.span`
   max-width: 100%;
   overflow: hidden;
 
-  /* Desktop behavior */
   @media (min-width: 769px) {
     white-space: nowrap;
     border-right: 2px solid var(--primary);
@@ -186,11 +179,10 @@ export const TypingText = styled.span`
       ${blink} 0.75s step-end infinite;
   }
 
-  /* Mobile behavior */
   @media (max-width: 768px) {
-    white-space: normal; /* Allow wrapping if needed */
-    animation: ${fadeSlide} 1.5s ease-out forwards; /* Simple fade-in/slide */
-    border-right: none; /* Remove cursor on mobile */
+    white-space: normal;
+    animation: ${fadeSlide} 1.5s ease-out forwards;
+    border-right: none;
     padding: 0.15rem 0.4rem;
   }
 
@@ -261,45 +253,48 @@ export const StatLabel = styled.span`
 
 export const CTAContainer = styled(motion.div)`
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 1rem;
   justify-content: center;
+  align-items: center; // Center items horizontally
   margin-bottom: 3rem;
+  max-width: 800px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 
   @media (max-width: 768px) {
-    flex-direction: column;
     gap: 1rem;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 `;
 
-export const CTAButton = styled.a`
-  display: inline-flex;
+export const TerminalContainer = styled.div`
+  display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-decoration: none;
-
-  ${props => props.$isPrimary ? `
-    background: var(--primary);
-    color: var(--background);
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 255, 157, 0.2);
-    }
-  ` : `
-    background: rgba(0, 255, 157, 0.1);
-    color: var(--primary);
-    &:hover {
-      background: rgba(0, 255, 157, 0.2);
-      transform: translateY(-2px);
-    }
-  `}
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 157, 0.2);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px; // Constrain terminal width
+  overflow: hidden;
 
   @media (max-width: 768px) {
-    padding: 0.75rem 1.5rem;
+    max-width: 100%;
+    padding: 0.5rem 0.75rem;
+  }
+`;
+
+export const TerminalText = styled(motion.span)`
+  font-family: 'Courier New', monospace;
+  color: var(--primary);
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
     font-size: 0.875rem;
   }
 `;

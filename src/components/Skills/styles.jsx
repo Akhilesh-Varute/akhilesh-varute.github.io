@@ -1,4 +1,3 @@
-// components/Skills/styles.js
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -29,7 +28,7 @@ export const SkillsSection = styled.section`
 `;
 
 export const MainContainer = styled(motion.div)`
-  max-width: 1400px;
+  max-width: 1200px; // Synced with Projects
   width: 100%;
   padding: 2rem;
   margin: 0 auto;
@@ -37,7 +36,7 @@ export const MainContainer = styled(motion.div)`
 
 export const SectionHeader = styled.div`
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem; // Increased from 4rem
 `;
 
 export const Title = styled(motion.h2)`
@@ -48,6 +47,7 @@ export const Title = styled(motion.h2)`
   background-clip: text;
   color: transparent;
   margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); // Added glow
 `;
 
 export const Subtitle = styled(motion.p)`
@@ -60,8 +60,8 @@ export const Subtitle = styled(motion.p)`
 
 export const SkillsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Kept adaptive
+  gap: 3rem; // Increased from 2.5rem
   width: 100%;
   perspective: 1500px;
 
@@ -73,8 +73,8 @@ export const SkillsGrid = styled.div`
 
 export const SkillCard = styled(motion.div)`
   position: relative;
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(0, 255, 157, 0.1);
+  background: rgba(0, 0, 0, 0.85); // Synced with Projects
+  border: 1px solid rgba(0, 255, 157, 0.2); // Synced with Projects
   border-radius: 20px;
   padding: 2.5rem;
   backdrop-filter: blur(10px);
@@ -82,8 +82,8 @@ export const SkillCard = styled(motion.div)`
 
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 255, 157, 0.1);
-    border-color: rgba(0, 255, 157, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 255, 157, 0.15);
+    border-color: rgba(0, 255, 157, 0.4);
   }
 `;
 
@@ -101,8 +101,8 @@ export const CategoryIcon = styled.div`
 
   ${SkillCard}:hover & {
     transform: scale(1.1);
-    background: rgba(0, 255, 157, 0.15);
-    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+    background: rgba(0, 255, 157, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.25);
   }
 `;
 
@@ -111,7 +111,7 @@ export const CategoryTitle = styled.h3`
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 255, 157, 0.3); // Added for readability
 
   ${SkillCard}:hover & {
     transform: translateY(-5px);
@@ -121,7 +121,7 @@ export const CategoryTitle = styled.h3`
 
 export const SkillsList = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; // Changed to column for cleaner flow
   gap: 1rem;
   margin-top: 1rem;
 `;
@@ -129,7 +129,7 @@ export const SkillsList = styled.div`
 export const SkillTag = styled(motion.div)`
   padding: 0.75rem 1.25rem;
   background: rgba(0, 255, 157, 0.05);
-  border: 1px solid rgba(0, 255, 157, 0.1);
+  border: 1px solid rgba(0, 255, 157, 0.15);
   border-radius: 12px;
   font-size: 0.95rem;
   color: var(--text-secondary);
@@ -139,7 +139,7 @@ export const SkillTag = styled(motion.div)`
   &:hover {
     transform: translateY(-2px);
     background: rgba(0, 255, 157, 0.1);
-    border-color: rgba(0, 255, 157, 0.2);
+    border-color: rgba(0, 255, 157, 0.3);
     color: var(--primary);
   }
 `;
