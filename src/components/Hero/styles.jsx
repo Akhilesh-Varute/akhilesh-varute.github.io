@@ -67,6 +67,20 @@ export const Content = styled(motion.div)`
   text-align: center;
 `;
 
+export const CTAButton = styled(motion.a)`
+  display: inline-block;
+  padding: 10px 20px;
+  background: #2c3e50; /* Deep navy background */
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  &:hover {
+    background: #1f2a3c; /* Slightly darker navy on hover */
+  }
+`;
+
 export const Badge = styled(motion.div)`
   display: inline-flex;
   align-items: center;
