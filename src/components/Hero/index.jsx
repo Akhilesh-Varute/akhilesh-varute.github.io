@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Terminal, Code, Server } from 'lucide-react';
 import {
-  HeroContainer, Background, Grid, GridItem, Content, Badge, HeroTitle, TitleHighlight,
+  HeroContainer, Content, Badge, HeroTitle, TitleHighlight,
   SubtitleContainer, Subtitle, TypingText, StatsContainer, StatItem, StatContent,
   StatNumber, StatLabel, CTAContainer, SocialLinks, SocialLink, SocialLabel, TypedTextContainer,
   TerminalContainer, TerminalText

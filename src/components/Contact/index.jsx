@@ -56,18 +56,21 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       try {
-        const formData = new FormData();
-        formData.append('name', formState.name);
-        formData.append('email', formState.email);
-        formData.append('message', formState.message);
-
-        // Using formsubmit.co service - replace with your email
-        const response = await fetch('https://formsubmit.co/akhileshvarute23@gmail.com', {
+        // Replace with your n8n webhook URL
+        const response = await fetch('https://primary-production-9252.up.railway.app/webhook/contact-form', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formState.name,
+            email: formState.email,
+            message: formState.message
+          })
         });
 
         if (response.ok) {
+          const result = await response.json();
           setShowSuccess(true);
           setFormState({ name: '', email: '', message: '' });
           setTimeout(() => setShowSuccess(false), 3000);
@@ -135,17 +138,7 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <ContactForm
-                onSubmit={handleSubmit}
-                action="https://formsubmit.co/akhileshvarute23@gmail.com"
-                method="POST"
-              >
-                {/* Hidden fields for FormSubmit.co configuration */}
-                <input type="hidden" name="_subject" value="New Contact Form Submission" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_next" value={window.location.href} />
-
+              <ContactForm onSubmit={handleSubmit}>
                 <FormGroup>
                   <Label>Name</Label>
                   <Input
@@ -180,6 +173,8 @@ const Contact = () => {
                   />
                   {errors.message && <ErrorMessage>{errors.message}</ErrorMessage>}
                 </FormGroup>
+
+                {errors.submit && <ErrorMessage>{errors.submit}</ErrorMessage>}
 
                 <SubmitButton
                   whileHover={{ scale: 1.02 }}
