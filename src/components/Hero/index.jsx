@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Terminal, Code, Server } from 'lucide-react';
+import { Github, Linkedin, Mail, Terminal, Code, Server, Workflow } from 'lucide-react';
 import {
   HeroContainer, Content, Badge, HeroTitle, TitleHighlight,
   SubtitleContainer, Subtitle, TypingText, StatsContainer, StatItem, StatContent,
   StatNumber, StatLabel, CTAContainer, SocialLinks, SocialLink, SocialLabel, TypedTextContainer,
-  TerminalContainer, TerminalText
+  TerminalContainer, TerminalText, CTAButton
 } from './styles';
 
 const Hero = () => {
   const iconProps = { size: 24, className: "hero-icon", strokeWidth: 1.5 };
-  const typingTextContent = "Gen AI, cloud-native solutions, and full-stack development";
+  const typingTextContent = "Gen AI, cloud-native, full-stack, and business automation";
 
   // Rotating Quotes
   const quotes = [
     "Building the Future",
     "Cloud-Native Excellence",
+    "Automating Business Success",
+    "Streamlining Lead Generation"
   ];
   const [currentQuote, setCurrentQuote] = useState(0);
 
@@ -24,6 +26,7 @@ const Hero = () => {
     "git commit -m 'Launching innovation'",
     "npm run ai",
     "aws deploy --live",
+    "node automate --contact-leads"
   ];
   const [currentTerminal, setCurrentTerminal] = useState(0);
 
@@ -43,7 +46,6 @@ const Hero = () => {
 
   return (
     <HeroContainer id="home">
-
       <Content initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
         <Badge initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }}>
           <Terminal {...iconProps} />
@@ -51,7 +53,7 @@ const Hero = () => {
         </Badge>
 
         <HeroTitle initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
-          Innovating with <TitleHighlight>Cloud & AI</TitleHighlight>
+          Innovating with <TitleHighlight>Cloud, AI & Automation</TitleHighlight>
         </HeroTitle>
 
         <SubtitleContainer initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}>
@@ -74,6 +76,13 @@ const Hero = () => {
             <StatContent>
               <StatNumber>75%</StatNumber>
               <StatLabel>Faster Deployment</StatLabel>
+            </StatContent>
+          </StatItem>
+          <StatItem>
+            <Workflow {...iconProps} />
+            <StatContent>
+              <StatNumber>50%</StatNumber>
+              <StatLabel>Faster Lead Capture</StatLabel>
             </StatContent>
           </StatItem>
         </StatsContainer>
@@ -101,6 +110,16 @@ const Hero = () => {
               {terminalMessages[currentTerminal]}
             </TerminalText>
           </TerminalContainer>
+
+          <CTAButton
+            href="https://contact-form-automation.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View Lead Automation
+          </CTAButton>
         </CTAContainer>
 
         <SocialLinks initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.8 }}>

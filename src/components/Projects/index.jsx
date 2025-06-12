@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Cloud, Activity, Database } from 'lucide-react';
+import { Brain, Cloud, Activity, Database, Workflow } from 'lucide-react';
 import {
   ProjectsSection,
   ProjectsContainer,
@@ -45,6 +45,21 @@ const projectsData = [
     impact: "40% Faster Debugging",
     tech: ["CI/CD", "Docker", "Kubernetes", "FastAPI"],
     icon: Activity
+  },
+  {
+    title: "Business Automation Solutions",
+    description: "Developed custom automation workflows for small businesses to streamline lead generation, CRM integrations, and operational processes. Built API-driven systems to automate customer outreach and data reporting, enhancing productivity and scalability.",
+    impact: "40% Time Savings",
+    tech: ["JavaScript", "Node.js", "APIs", "Cloud"],
+    icon: Workflow
+  },
+  {
+    title: "Contact Form Lead Automation",
+    description: "Built a scalable web application to automate lead capture and management through contact forms, integrating with CRMs and email systems. Deployed on Vercel for high performance and reliability, streamlining client outreach for small businesses.",
+    impact: "50% Faster Lead Capture",
+    tech: ["JavaScript", "Node.js", "APIs", "Vercel"],
+    icon: Workflow,
+    link: "https://contact-form-automation.vercel.app/"
   }
 ];
 
@@ -118,6 +133,18 @@ const Projects = () => {
                   </TechTag>
                 ))}
               </TechStack>
+              {project.link && (
+                <motion.a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{ marginTop: '1rem', display: 'inline-block', color: 'var(--primary)', textDecoration: 'underline' }}
+                >
+                  View Project
+                </motion.a>
+              )}
             </ProjectCard>
           ))}
         </ProjectsGrid>

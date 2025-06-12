@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Cloud, Database, Layout, Brain, Terminal } from 'lucide-react';
+import { Code, Cloud, Database, Layout, Brain, Terminal, Workflow } from 'lucide-react';
 import {
   SkillsSection,
   MainContainer,
@@ -61,6 +61,17 @@ const skillsData = [
       { name: "Technical Planning", level: 85 },
       { name: "Mentorship", level: 80 }
     ]
+  },
+  {
+    category: "Business Automation",
+    icon: Workflow,
+    skills: [
+      { name: "Lead Generation", level: 85 },
+      { name: "API Integrations", level: 90 },
+      { name: "Process Automation", level: 85 },
+      { name: "CRM Workflows", level: 80 },
+      { name: "Workflow Optimization", level: 85 }
+    ]
   }
 ];
 
@@ -117,7 +128,7 @@ const Skills = () => {
                 <category.icon size={32} strokeWidth={1.5} />
               </CategoryIcon>
               <CategoryTitle>{category.category}</CategoryTitle>
-              
+
               <SkillsList>
                 {category.skills.map((skill, i) => (
                   <SkillTag
